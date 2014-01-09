@@ -1,0 +1,13 @@
+<%@ val body: String %>
+
+<!doctype html>
+<html>
+  <head>
+    <title>Moonraker Analytics</title>
+  <body>
+    <div id="content">
+      <h1>Moonraker Analytics</h1>
+      <%= unescape(body) %>
+    </div>
+  </body>
+</html>

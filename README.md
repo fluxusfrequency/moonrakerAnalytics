@@ -6,6 +6,7 @@
 $ cd Moonraker_Analytics
 $ ./sbt
 > container:start
+> ~ ;copy-resources;aux-compile
 > browse
 ```
 

@@ -8,7 +8,7 @@ class MyMoonrakerAnalyticsServlet extends MoonrakerAnalyticsStack {
   get("/") {
     contentType="text/html"
 
-    jade("/index")
+    ssp("/index")
   }
 
   post("/sources") {
