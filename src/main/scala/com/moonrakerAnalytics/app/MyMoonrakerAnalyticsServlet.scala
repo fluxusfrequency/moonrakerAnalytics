@@ -6,12 +6,25 @@ import scalate.ScalateSupport
 class MyMoonrakerAnalyticsServlet extends MoonrakerAnalyticsStack {
 
   get("/") {
-    <html>
-      <body>
-        <h1>Hello, world!</h1>
-        Say <a href="hello-scalate">hello to Scalate</a>.
-      </body>
-    </html>
+    contentType="text/html"
+
+    jade("/index")
   }
-  
+
+  post("/sources") {
+    contentType="json"
+    // parsedBody.extract[Submission]
+    // if(params) {
+      200
+    // } else {
+      // 200
+    // }
+  }
+
+  notFound {
+    resourceNotFound()
+  }
+
 }
+
+case class Submission(identifier: String, rootUrl: String)
