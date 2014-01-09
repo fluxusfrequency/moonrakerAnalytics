@@ -12,12 +12,12 @@ class MyMoonrakerAnalyticsServlet extends MoonrakerAnalyticsStack {
 
   post("/sources") {
     contentType="json"
-    // parsedBody.extract[Submission]
-    // if(params) {
-      200
-    // } else {
-      // 200
-    // }
+   Ok("Ok, created an identifier for you.")
+  }
+
+  post("/sources/:application/data") {
+    contentType="json"
+    Ok("Ok, saved your data.")
   }
 
   notFound {
@@ -26,5 +26,3 @@ class MyMoonrakerAnalyticsServlet extends MoonrakerAnalyticsStack {
   }
 
 }
-
-case class Submission(identifier: String, rootUrl: String)
