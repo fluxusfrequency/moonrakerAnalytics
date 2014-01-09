@@ -1,5 +1,4 @@
 <%@ val body: String %>
-
 <!doctype html>
 <html>
   <head>

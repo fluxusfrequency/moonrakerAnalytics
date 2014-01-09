@@ -7,7 +7,6 @@ class MyMoonrakerAnalyticsServlet extends MoonrakerAnalyticsStack {
 
   get("/") {
     contentType="text/html"
-
     ssp("/index")
   }
 
@@ -22,7 +21,8 @@ class MyMoonrakerAnalyticsServlet extends MoonrakerAnalyticsStack {
   }
 
   notFound {
-    resourceNotFound()
+    contentType="text/html"
+    ssp("/error")
   }
 
 }
