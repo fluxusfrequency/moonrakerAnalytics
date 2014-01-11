@@ -26,6 +26,7 @@ object MoonrakerAnalyticsBuild extends Build {
         "org.json4s" %% "json4s-jackson" % "3.2.6",
         "org.scalatra" %% "scalatra" % ScalatraVersion,
         "org.scalatra" %% "scalatra-scalate" % ScalatraVersion,
+        "org.scalatest" %% "scalatest" % "2.0.RC1" % "test",
         "org.scalatra" %% "scalatra-specs2" % ScalatraVersion % "test",
         "ch.qos.logback" % "logback-classic" % "1.0.6" % "runtime",
         "org.eclipse.jetty" % "jetty-webapp" % "8.1.8.v20121106" % "container",
