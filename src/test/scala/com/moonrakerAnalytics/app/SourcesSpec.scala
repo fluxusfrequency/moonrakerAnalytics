@@ -15,9 +15,12 @@ class SourcesSpec extends FlatSpec with Matchers {
 
   it should "have a save method" in {
     source.count should be(0)
-    source.save
+    source.save should be(true)
     source.count should be(1)
   }
 
+  it should "have a destroy all method" in {}
+  it should "have a registered method" in {}
+  it should "have a create method" in {}
 }
 
