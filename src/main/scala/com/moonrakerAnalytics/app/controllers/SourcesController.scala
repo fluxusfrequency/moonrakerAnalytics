@@ -10,7 +10,8 @@ object SourcesController extends MoonrakerAnalyticsStack {
       val status = 200
       val body = "Created $params(\"identifier\") source for url $params(\"rootUrl\")}"
     } else {
-      val status =
+      val status = statusFor(source.errors.first.category)
+      val body = source.errors.collect{|e| e.message}.join(", ")
     }
   }
 
