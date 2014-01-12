@@ -1,6 +1,6 @@
 package com.moonrakerAnalytics.app
 
-object SourcesController extends MoonrakerAnalyticsStack {
+object DataController extends MoonrakerAnalyticsStack {
   def create(params: Map[String, String]) = {
     // val source = new Source("identifier" => params("identifier"),
     //                         "rootUrl" => params("rootUrl"))
@@ -10,4 +10,6 @@ object SourcesController extends MoonrakerAnalyticsStack {
   //   case ("repeatedIdentifier") => 403
   //   case (_) => "No return status defined for this flag."
   // }
+
+
 }

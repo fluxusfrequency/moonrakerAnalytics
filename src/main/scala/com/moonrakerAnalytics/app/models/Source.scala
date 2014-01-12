@@ -10,6 +10,7 @@ class Source(id: String, url: String) {
     sourceCount += 1
     return true
   }
+  def isValid {}
   def registered {}
   def create {}
   def destroyAll {}

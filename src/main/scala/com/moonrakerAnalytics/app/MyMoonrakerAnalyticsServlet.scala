@@ -12,11 +12,15 @@ class MyMoonrakerAnalyticsServlet extends MoonrakerAnalyticsStack {
 
   post("/sources") {
     contentType="json"
-   Ok("Ok, created an identifier for you.")
+    // status = SourcesController.create(params).status
+    // body = SourcesController.create(params).body
+    Ok("Ok, created an identifier for you.")
   }
 
   post("/sources/:application/data") {
     contentType="json"
+    // status = DataController.create(params).status
+    // body = DataController.create(params).body
     Ok("Ok, saved your data.")
   }
 

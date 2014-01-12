@@ -2,7 +2,7 @@ package com.moonrakerAnalytics.app
 
 import org.scalatest._
 
-class ResponseSpec extends FlatSpec with Matchers {
+class RequestSpec extends FlatSpec with Matchers {
   def request = new Request("/jk10d2", "JetFuelExpress")
 
   it should "be a request" in {
