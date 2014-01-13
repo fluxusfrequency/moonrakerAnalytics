@@ -18,22 +18,21 @@ class RequestSpec extends FlatSpec with Matchers {
   }
 
   it should "have an exists method" in {
-    request.exists shouldBe true
+    Request.exists(request) shouldBe false
   }
 
   it should "have a save method" in {
     pending
     request.save
-  }
-
-  it should "check the equality of data and source" in {
-    pending
-    request.areEqual
+    Request.exists(request) shouldBe true
   }
 
   it should "have a destroy all method" in {
-    pending
-    request.destroyAll
+    Request.count shouldBe 0
+    request.save
+    Request.count shouldBe 1
+    Request.destroyAll
+    Request.count shouldBe 0
   }
 }
 
