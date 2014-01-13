@@ -3,8 +3,8 @@ package com.moonrakerAnalytics.app
 class Request(dataInput: String, sourceInput: String) {
   def data: String = { return dataInput }
   def source: String = { return sourceInput }
-  def exists {}
+  def exists: Boolean = { return true }
   def save {}
   def areEqual {}
-  def destroyAll
+  def destroyAll {}
 }

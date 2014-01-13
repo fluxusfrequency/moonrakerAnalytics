@@ -17,9 +17,23 @@ class RequestSpec extends FlatSpec with Matchers {
     request.source shouldBe "JetFuelExpress"
   }
 
-  it should "have an exists method" in {}
-  it should "have a save method" in {}
-  it should "check the equality of data and source" in {}
-  it should "have a destroy all method" in {}
+  it should "have an exists method" in {
+    request.exists shouldBe true
+  }
+
+  it should "have a save method" in {
+    pending
+    request.save
+  }
+
+  it should "check the equality of data and source" in {
+    pending
+    request.areEqual
+  }
+
+  it should "have a destroy all method" in {
+    pending
+    request.destroyAll
+  }
 }
 
