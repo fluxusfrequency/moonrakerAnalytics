@@ -19,20 +19,4 @@ object SourcesController extends MoonrakerAnalyticsStack {
     }
   }
 
-  //   if (source.isValid) {
-  //     source.save
-  //     val status = 200
-  //     val body = "Created $params(\"identifier\") source for url $params(\"rootUrl\")}"
-  //   } else {
-  //     val status = statusFor(source.errors.first.category)
-  //     // val body = source.errors.collect{|e| e.message}.join(", ")
-  //   }
-
-  // private def statusFor(flag: String): Match = {
-  //   case "missingParameter" => 400
-  //   case "repeatedIdentifier" => 403
-  //   case _ => "No return status defined for flag $flag"
-  // }
-
-
 }

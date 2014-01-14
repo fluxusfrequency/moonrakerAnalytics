@@ -1,24 +1,19 @@
 package com.moonrakerAnalytics.app
 
-import org.scalatra.test.specs2._
+import org.scalatest._
 
-// For more on Specs2, see http://etorreborre.gxithub.com/specs2/guide/org.specs2.guide.QuickStart.html
-// class DataControllerSpec extends FlatSpec with Matchers {
-  // val params = ("payload" =>
-  //   "{\"url\":\"http://jumpstartlab.com/blog\",
-  //     \"requestedAt\":\"2013-02-16 21:38:28 -0700\",
-  //     \"respondedIn\":37,
-  //     \"referredBy\":\"http://jumpstartlab.com\",
-  //     \"requestType\":\"GET\",
-  //     \"parameters\":[],
-  //     \"eventName\": \"socialLogin\",
-  //     \"userAgent\":\"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_2) AppleWebKit/537.17 (KHTML, like Gecko) Chrome/24.0.1309.0 Safari/537.17\",
-  //     \"resolutionWidth\":\"1920\",
-  //     \"resolutionHeight\":\"1280\",
-  //     \"ip\":\"63.29.38.211\" }",
-  //     "application" => "JetFuelExpress")
+class DataControllerSpec extends FlatSpec with Matchers {
+  val params = Map("payload" -> "\"{\"url\":\"http://jumpstartlab.com/blog\",\"requestedAt\":\"2013-02-16 21:38:28 -0700\",\"respondedIn\":37,\"referredBy\":\"http://jumpstartlab.com\",\"requestType\":\"GET\",\"parameters\":[],\"eventName\": \"socialLogin\",\"userAgent\":\"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_2) AppleWebKit/537.17 (KHTML, like Gecko) Chrome/24.0.1309.0 Safari/537.17\",\"resolutionWidth\":\"1920\",\"resolutionHeight\":\"1280\",\"ip\":\"63.29.38.211\" }\"", "application" -> "JetFuelExpress")
+  val application = Source.create(Map("identifier" -> "jetfuelexpress", "rootUrl" -> "jfx.herokuapp.com"))
 
-  // val application = Source.create("identifier" => "jetfuelexpress", "rootUrl" => "jfx.herokuapp.com")
+
+  it should "accept parameters" in {
+    // result = DataController.create()
+  //   Source.count shouldBe 0
+  //   SourcesController.create(Map("identifier" -> "hello", "rootUrl" -> "world"))
+  //   Source.count shouldBe 1
+    Source.destroyAll
+  }
 
   // xit should "return 403 and a message" in {
   //   val result = DataController.create(params)
@@ -44,4 +39,6 @@ import org.scalatra.test.specs2._
   //   invalid.status should be 403
   //   invalid.body should include "duplicate"
   // }
-// }
+
+}
+

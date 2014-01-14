@@ -17,6 +17,7 @@ class SourcesControllerSpec extends FlatSpec with Matchers {
     val result = SourcesController.create(Map("identifier" -> "jetfuelexpress", "rootUrl" -> "jfx.herokuapp.com"))
     result.status shouldBe 200
     result.body shouldBe "Created source jetfuelexpress for url jfx.herokuapp.com."
+    Source.destroyAll
   }
 
   it should "reject a duplicate source with a 403" in {
@@ -24,18 +25,21 @@ class SourcesControllerSpec extends FlatSpec with Matchers {
     val result2 = SourcesController.create(Map("identifier" -> "jetfuelexpress", "rootUrl" -> "jfx.herokuapp.com"))
     result2.status shouldBe 403
     result2.body shouldBe "Sorry, the id or url you requested has already been taken."
+    Source.destroyAll
   }
 
   it should "return 400 and a message when missing the identifier" in {
     val result = SourcesController.create(Map("identifier" -> null, "rootUrl" -> "jfx.herokuapp.com"))
     result.status shouldBe 400
     result.body shouldBe "Missing identifier parameter"
+    Source.destroyAll
   }
 
   it should "return 400 and a message when missing the rootUrl" in {
     val result = SourcesController.create(Map("identifier" -> "jetfuelexpress", "rootUrl" -> null))
     result.status shouldBe 400
     result.body shouldBe "Missing rootUrl parameter"
+    Source.destroyAll
   }
 
 }
