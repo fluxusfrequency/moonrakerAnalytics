@@ -21,18 +21,36 @@ class RequestSpec extends FlatSpec with Matchers {
     Request.exists(request) shouldBe false
   }
 
-  it should "have a save method" in {
-    pending
+  it should "not exist when created as a duplicate" in {
+    var request4 = new Request(request.data, "griffinApp")
+    Request.count shouldBe 0
     request.save
-    Request.exists(request) shouldBe true
+    request4.save shouldBe false
+    Request.count shouldBe 1
+    Request.destroyAll
+  }
+
+  it should "have a save method" in {
+    var request2 = new Request("/myuri", "orcApp")
+    Request.count shouldBe 0
+    Request.exists(request2) shouldBe false
+    request2.save shouldBe true
+    Request.count shouldBe 1
+    Request.exists(request2) shouldBe true
+    Request.destroyAll
+    Request.count shouldBe 0
   }
 
   it should "have a destroy all method" in {
+    var request3 = new Request("/myurl", "goblinApp")
+    Request.destroyAll
     Request.count shouldBe 0
-    request.save
+    request3.save
     Request.count shouldBe 1
     Request.destroyAll
     Request.count shouldBe 0
   }
+
+
 }
 
