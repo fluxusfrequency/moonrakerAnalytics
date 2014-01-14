@@ -1,8 +1,21 @@
 package com.moonrakerAnalytics.app
 
-class Response(inputStatus: Int, inputBody: String) {
-  def status:Int = { return inputStatus }
-  def body: String = { return inputBody }
+class Response(inputs: Map[String, Any]) {
 
-  // private def defaultStatus:Int = { return 400 }
+  def status:Any = {
+    if (inputs("status") == null) {
+      return 200
+    } else {
+      return inputs("status")
+    }
+  }
+
+  def body:Any = {
+    if (inputs("body") == null) {
+      return ""
+    } else {
+      return inputs("body")
+    }
+  }
+
 }
