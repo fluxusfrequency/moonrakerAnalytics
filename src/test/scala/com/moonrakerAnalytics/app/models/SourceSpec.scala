@@ -30,18 +30,17 @@ class SourcesSpec extends FlatSpec with Matchers {
   }
 
   it should "have a registered method" in {
-    Source.registered(source) shouldBe false
+    Source.registered(source.identifier) shouldBe false
     source.save
-    Source.registered(source) shouldBe true
+    Source.registered(source.identifier) shouldBe true
     Source.destroyAll
   }
 
   it should "not register a duplicate app" in {
-    Source.registered(source) shouldBe false
+    Source.registered(source.identifier) shouldBe false
     source.save
     val source3 = new Source("jetfuelexpress", "jfx.herokuapp.com")
-    source3.save
-    Source.registered(source3) shouldBe false
+    source3.save shouldBe false
     Source.destroyAll
   }
 
@@ -68,6 +67,7 @@ class SourcesSpec extends FlatSpec with Matchers {
     val source6 = new Source("JetFuel Xpress", null)
     source6.isValid shouldBe false
     source6.errors shouldBe Map("category" -> "missing parameter", "message" -> "Missing rootUrl parameter")
+    Source.destroyAll
   }
 
   it should "display its errors if check show already registered" in {

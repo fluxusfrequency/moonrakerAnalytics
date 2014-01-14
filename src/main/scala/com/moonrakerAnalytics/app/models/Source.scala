@@ -44,11 +44,11 @@ object Source {
     return true
   }
 
-  def registered(source: Source): Boolean = {
-    if (sources.indexOf(source) == -1) {
-      return false
-    } else {
+  def registered(sourceIdentifier: String): Boolean = {
+    if (sources.exists(s => s.identifier == sourceIdentifier)) {
       return true
+    } else {
+      return false
     }
   }
 

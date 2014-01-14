@@ -1,10 +1,28 @@
 package com.moonrakerAnalytics.app
 
 class Request(dataInput: String, sourceInput: String) {
-
+  var errors = scala.collection.mutable.Seq[ValidationError]()
   def data: String = { return dataInput }
   def source: String = { return sourceInput }
   def save: Boolean = { Request.save(this) }
+
+  def isValid: Boolean = {
+    if (sourceInput == null || Source.registered(sourceInput)) {
+      val error = new ValidationError(Map("category" -> "missing application", "message" -> "No application was submitted."))
+      errors :+ error
+      return false
+    } else if (dataInput == null) {
+      val error = new ValidationError(Map("category" -> "missing data", "message" -> "No data was submitted."))
+      errors :+ error
+      return false
+    } else if (Request.exists(this)){
+      val error = new ValidationError(Map("category" -> "duplicate request", "message" -> "This request has already been submitted."))
+      errors :+ error
+      return false
+    } else {
+      return true
+    }
+  }
 }
 
 object Request {
