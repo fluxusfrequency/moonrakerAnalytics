@@ -4,7 +4,7 @@ class Source(id: String, url: String) {
   var errors = scala.collection.mutable.Map[String, String]()
   def identifier: String = { return id }
   def rootUrl: String = { return url }
-  def save { Source.save(this)}
+  def save: Boolean = { return Source.save(this)}
 
   def isValid: Boolean = {
     if (this.id == null) {
