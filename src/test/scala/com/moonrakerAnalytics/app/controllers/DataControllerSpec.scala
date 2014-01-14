@@ -3,21 +3,29 @@ package com.moonrakerAnalytics.app
 import org.scalatest._
 
 class DataControllerSpec extends FlatSpec with Matchers {
-  val params = Map("payload" -> "\"{\"url\":\"http://jumpstartlab.com/blog\",\"requestedAt\":\"2013-02-16 21:38:28 -0700\",\"respondedIn\":37,\"referredBy\":\"http://jumpstartlab.com\",\"requestType\":\"GET\",\"parameters\":[],\"eventName\": \"socialLogin\",\"userAgent\":\"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_2) AppleWebKit/537.17 (KHTML, like Gecko) Chrome/24.0.1309.0 Safari/537.17\",\"resolutionWidth\":\"1920\",\"resolutionHeight\":\"1280\",\"ip\":\"63.29.38.211\" }\"", "application" -> "JetFuelExpress")
+  val params = Map("payload" -> "hello", "application" -> "JetFuelExpress")
 
   it should "return a 200 when the application is registered" in {
-    // val application = Source.create(Map("identifier" -> "jetfuelexpress", "rootUrl" -> "jfx.herokuapp.com"))
-    val result = DataController.create(params)
-    result.status shouldBe 200
-    result.body shouldBe "Data stored for JetFuelExpress"
+    Source.count shouldBe 0
+    Source.create(Map("identifier" -> "JetFuelExpress", "rootUrl" -> "jfx.herokuapp.com")) shouldBe true
+    Source.count shouldBe 1
+    Source.all(0).identifier shouldBe "JetFuelExpress"
+    Source.all(0) shouldBe a [Source]
+    Source.registered(params("application")) shouldBe true
+    val response = DataController.create(params)
+    response.status shouldBe 200
+    response.body shouldBe "Data stored for JetFuelExpress"
     Request.destroyAll
+    Source.destroyAll
   }
 
   it should "return 403 and a message if application is not registered" in {
+    pending
     val result = DataController.create(params)
     result.status shouldBe 403
     result.body shouldBe "Application is not registered"
     Request.destroyAll
+    Source.destroyAll
   }
 
   // xit should "create a request record" in {

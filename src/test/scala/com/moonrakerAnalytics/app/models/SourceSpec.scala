@@ -3,7 +3,7 @@ package com.moonrakerAnalytics.app
 import org.scalatest._
 
 class SourcesSpec extends FlatSpec with Matchers {
-  val source = new Source("jetfuelexpress", "jfx.herokuapp.com")
+  def source = new Source("jetfuelexpress", "jfx.herokuapp.com")
 
   it should "have an identifier" in {
     source.identifier shouldBe ("jetfuelexpress")
@@ -14,6 +14,7 @@ class SourcesSpec extends FlatSpec with Matchers {
   }
 
   it should "have a save method" in {
+    Source.destroyAll
     Source.count shouldBe (0)
     source.save
     Source.count shouldBe (1)
@@ -46,7 +47,7 @@ class SourcesSpec extends FlatSpec with Matchers {
 
   it should "have a create method" in {
     Source.count shouldBe 0
-    Source.create(Map("identifier" -> "reddit", "rootUrl" -> "www.reddit.com"))
+    Source.create(Map("identifier" -> "reddit", "rootUrl" -> "www.reddit.com")) shouldBe true
     Source.count shouldBe 1
     Source.all(0) shouldBe a [Source]
     Source.destroyAll

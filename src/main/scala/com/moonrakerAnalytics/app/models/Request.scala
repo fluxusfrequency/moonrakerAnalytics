@@ -7,7 +7,7 @@ class Request(dataInput: String, sourceInput: String) {
   def save: Boolean = { Request.save(this) }
 
   def isValid: Boolean = {
-    if (sourceInput == null || Source.registered(sourceInput)) {
+    if (sourceInput == null) {
       val error = new ValidationError(Map("category" -> "missing application", "message" -> "No application was submitted."))
       errors :+ error
       return false
