@@ -1,13 +1,8 @@
 package com.moonrakerAnalytics.app
 
 import org.scalatest._
-import org.scalatest.BeforeAndAfterEach
 
-class DataControllerSpec extends FlatSpec with Matchers with BeforeAndAfterEach {
-  override def beforeEach() {
-    Source.destroyAll
-    Request.destroyAll
-  }
+class DataControllerSpec extends FlatSpec with Matchers {
 
   def params = Map("payload" -> "hello", "application" -> "JetFuelExpress")
 
@@ -18,38 +13,46 @@ class DataControllerSpec extends FlatSpec with Matchers with BeforeAndAfterEach 
   }
 
   it should "return a 200 when the application is registered" in {
-    pending
+    Source.destroyAll
+    Request.destroyAll
     Source.count shouldBe 0
     Source.create(Map("identifier" -> "JetFuelExpress", "rootUrl" -> "jfx.herokuapp.com")) shouldBe true
-    Source.count shouldBe 1
     Source.all(0).identifier shouldBe "JetFuelExpress"
     Source.all(0) shouldBe a [Source]
-    Source.registered(params("application")) shouldBe true
-    val response = DataController.create(params)
-    response.status shouldBe 200
-    response.body shouldBe "Data stored for JetFuelExpress"
+
+    Source.registered("JetFuelExpress") shouldBe true
+    val response3 = DataController.create(params)
+    response3.status shouldBe 200
+    response3.body shouldBe "Data stored for JetFuelExpress"
+    Source.destroyAll
+    Request.destroyAll
   }
 
   it should "create a request record" in {
-    pending
+    Source.destroyAll
+    Request.destroyAll
     Request.count shouldBe 0
-    DataController.create(params)
+    Source.create(Map("identifier" -> "cruel world", "rootUrl" -> "ack.com"))
+    val response4 = DataController.create(Map("payload" -> "goodbye", "application" -> "cruel world"))
+    response4.status shouldBe 200
     Request.count shouldBe 1
+    Source.destroyAll
+    Request.destroyAll
   }
 
   it should "return 400 when payload is missing" in {
-    pending
-    val response3 = DataController.create(Map("payload" -> null, "application" -> "Mama's Cakes"))
-    response3.status shouldBe 400
-    response3.body shouldBe "Missing parameter"
+    Source.create(Map("identifier" -> "Mama's Cakes", "rootUrl" -> "mamascakes.org"))
+    val response5 = DataController.create(Map("payload" -> null, "application" -> "Mama's Cakes"))
+    response5.status shouldBe 400
+    response5.body shouldBe "Missing parameter"
   }
 
   it should "return 403 and a message for duplicate payload" in {
-    pending
-    val valid = DataController.create(params)
-    val invalid = DataController.create(params)
+    Source.create(Map("identifier" -> "Billy's BBQ", "rootUrl" -> "billysbbq.com"))
+    val valid = DataController.create(Map("payload" -> "Ribs", "application" -> "Billy's BBQ"))
+    val invalid = DataController.create(Map("payload" -> "Ribs", "application" -> "Billy's BBQ"))
     invalid.status shouldBe 403
-    invalid.body shouldBe "duplicate"
+    invalid.body shouldBe "Duplicate request"
   }
 
 }

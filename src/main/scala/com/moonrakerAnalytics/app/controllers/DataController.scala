@@ -7,23 +7,19 @@ object DataController extends MoonrakerAnalyticsStack {
     val application = params("application")
 
     if (request.isValid) {
-      request.save
+      Request.save(request)
       val response = new Response( Map("status" -> 200, "body" -> s"Data stored for $application"))
       return response
     } else if (!Source.registered(application)) {
       val response = new Response( Map("status" -> 403, "body" -> "Application is not registered"))
       return response
+    } else if (Request.duplicateData(request)) {
+      val response = new Response( Map("status" -> 403, "body" -> "Duplicate request"))
+      return response
     } else {
       val response = new Response( Map("status" -> 400, "body" -> "Missing parameter"))
       return response
     }
-
   }
 
-  private def statusFor(flag: String): Int = flag match {
-    case "missing parameter" => 400
-    case "unregistered application" => 403
-    case "duplicate request" => 403
-    case _ => 404
-  }
 }

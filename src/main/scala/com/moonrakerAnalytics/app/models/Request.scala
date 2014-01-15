@@ -23,7 +23,7 @@ class Request(dataInput: String, sourceInput: String) {
       val error = new ValidationError(Map("category" -> "missing parameter", "message" -> "No data was submitted."))
       requestErrors :+ error
       return false
-    } else if (Request.exists(this)){
+    } else if (Request.duplicateData(this)){
       val error = new ValidationError(Map("category" -> "duplicate request", "message" -> "This request has already been submitted."))
       requestErrors :+ error
       return false
@@ -56,13 +56,15 @@ object Request {
     }
   }
 
-  // def duplicateData(request: Request): Boolean = {
-  //   val data = request.data
-  //   val source = request.source
-  //   if (requests.exists(r => r.data == data || r.source == source)) {
-  //     return true
-  //   } else {
-  //     return false
-  //   }
-  // }
+  def all: scala.collection.mutable.MutableList[Request] = { return requests }
+
+  def duplicateData(request: Request): Boolean = {
+    val data = request.data
+    val source = request.source
+    if (requests.exists(r => r.data == data || r.source == source)) {
+      return true
+    } else {
+      return false
+    }
+  }
 }
