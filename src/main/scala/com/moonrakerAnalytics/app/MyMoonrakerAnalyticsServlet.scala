@@ -13,15 +13,17 @@ class MyMoonrakerAnalyticsServlet extends MoonrakerAnalyticsStack {
   post("/sources") {
     contentType="json"
     // status = SourcesController.create(params).status
-    // body = SourcesController.create(params).body
-    Ok("Ok, created an identifier for you.")
+    val body = SourcesController.create(params).body
+    Ok(s"$body")
   }
 
   post("/sources/:application/data") {
     contentType="json"
     // status = DataController.create(params).status
-    // body = DataController.create(params).body
-    Ok("Ok, saved your data.")
+    val requestData = Map("payload" -> request.body, "application" -> params("application"))
+    val responseBody = DataController.create(requestData).body
+
+    Ok(s"$responseBody")
   }
 
   notFound {
