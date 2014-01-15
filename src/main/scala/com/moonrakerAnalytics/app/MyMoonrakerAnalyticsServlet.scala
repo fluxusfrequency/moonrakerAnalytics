@@ -12,16 +12,18 @@ class MyMoonrakerAnalyticsServlet extends MoonrakerAnalyticsStack {
 
   post("/sources") {
     contentType="json"
-    // status = SourcesController.create(params).status
-    val body = SourcesController.create(params).body
-    Ok(s"$body")
+    val response = SourcesController.create(params)
+    val reponseStatus = response.status
+    val responseBody = response.body
+    Ok(s"$responseBody")
   }
 
   post("/sources/:application/data") {
     contentType="json"
-    // status = DataController.create(params).status
     val requestData = Map("payload" -> request.body, "application" -> params("application"))
-    val responseBody = DataController.create(requestData).body
+    val response = DataController.create(requestData)
+    val responseBody = response.body
+    val responseStatus = response.status
 
     Ok(s"$responseBody")
   }
