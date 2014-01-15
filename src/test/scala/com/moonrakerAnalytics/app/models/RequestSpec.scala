@@ -1,8 +1,13 @@
 package com.moonrakerAnalytics.app
 
 import org.scalatest._
+import org.scalatest.BeforeAndAfterEach
 
-class RequestSpec extends FlatSpec with Matchers {
+class RequestSpec extends FlatSpec with Matchers with BeforeAndAfterEach {
+  override def beforeEach() {
+    Request.destroyAll
+  }
+
   def request = new Request("/jk10d2", "JetFuelExpress")
 
   it should "be a request" in {
@@ -23,11 +28,12 @@ class RequestSpec extends FlatSpec with Matchers {
 
   it should "not exist when created as a duplicate" in {
     var request4 = new Request(request.data, "griffinApp")
+    var request5 = new Request(request.data, "elfApp")
     Request.count shouldBe 0
-    request.save
-    request4.save shouldBe false
+    request4.save
+    Request.exists(request5) shouldBe false
     Request.count shouldBe 1
-    Request.destroyAll
+
   }
 
   it should "have a save method" in {
@@ -37,13 +43,10 @@ class RequestSpec extends FlatSpec with Matchers {
     request2.save shouldBe true
     Request.count shouldBe 1
     Request.exists(request2) shouldBe true
-    Request.destroyAll
-    Request.count shouldBe 0
   }
 
   it should "have a destroy all method" in {
     var request3 = new Request("/myurl", "goblinApp")
-    Request.destroyAll
     Request.count shouldBe 0
     request3.save
     Request.count shouldBe 1

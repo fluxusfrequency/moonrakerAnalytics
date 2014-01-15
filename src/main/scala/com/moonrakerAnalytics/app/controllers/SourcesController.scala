@@ -3,7 +3,7 @@ package com.moonrakerAnalytics.app
 object SourcesController extends MoonrakerAnalyticsStack {
 
   def create(params: Map[String, String]): Response = {
-    val source = new Source( params("identifier"), params("rootUrl"))
+    var source = new Source( params("identifier"), params("rootUrl"))
     if(source.isValid) {
       source.save
       val response = new Response(Map("status" -> 200, "body" -> s"Created source ${source.identifier} for url ${source.rootUrl}."))

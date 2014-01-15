@@ -1,8 +1,14 @@
 package com.moonrakerAnalytics.app
 
 import org.scalatest._
+import org.scalatest.BeforeAndAfterEach
 
-class SourcesSpec extends FlatSpec with Matchers {
+
+class SourcesSpec extends FlatSpec with Matchers with BeforeAndAfterEach {
+  override def beforeEach() {
+    Source.destroyAll
+  }
+
   def source = new Source("jetfuelexpress", "jfx.herokuapp.com")
 
   it should "have an identifier" in {
@@ -14,11 +20,9 @@ class SourcesSpec extends FlatSpec with Matchers {
   }
 
   it should "have a save method" in {
-    Source.destroyAll
     Source.count shouldBe (0)
     source.save
     Source.count shouldBe (1)
-    Source.destroyAll shouldBe true
   }
 
   it should "have a destroy all method" in {
@@ -34,7 +38,6 @@ class SourcesSpec extends FlatSpec with Matchers {
     Source.registered(source.identifier) shouldBe false
     source.save
     Source.registered(source.identifier) shouldBe true
-    Source.destroyAll
   }
 
   it should "not register a duplicate app" in {
@@ -42,7 +45,6 @@ class SourcesSpec extends FlatSpec with Matchers {
     source.save
     val source3 = new Source("jetfuelexpress", "jfx.herokuapp.com")
     source3.save shouldBe false
-    Source.destroyAll
   }
 
   it should "have a create method" in {
@@ -50,7 +52,6 @@ class SourcesSpec extends FlatSpec with Matchers {
     Source.create(Map("identifier" -> "reddit", "rootUrl" -> "www.reddit.com")) shouldBe true
     Source.count shouldBe 1
     Source.all(0) shouldBe a [Source]
-    Source.destroyAll
   }
 
   it should "check its validity" in {
@@ -68,7 +69,6 @@ class SourcesSpec extends FlatSpec with Matchers {
     val source6 = new Source("JetFuel Xpress", null)
     source6.isValid shouldBe false
     source6.errors shouldBe Map("category" -> "missing parameter", "message" -> "Missing rootUrl parameter")
-    Source.destroyAll
   }
 
   it should "display its errors if check show already registered" in {
@@ -76,7 +76,6 @@ class SourcesSpec extends FlatSpec with Matchers {
     val source7 = new Source("jetfuelexpress", "jfx.herokuapp.com")
     source7.isValid shouldBe false
     source7.errors shouldBe Map("category" -> "already registered", "message" -> "Sorry, the id or url you requested has already been taken.")
-    Source.destroyAll
   }
 }
 

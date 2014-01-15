@@ -68,7 +68,7 @@ object Source {
   def alreadyRegistered(source: Source): Boolean = {
     val id = source.identifier
     val rootUrl = source.rootUrl
-    if (sources.exists(s => s.identifier == id || s.rootUrl == rootUrl)) {
+    if (sources.exists(s => s.identifier == id)) {
       return true
     } else {
     return false
