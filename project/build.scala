@@ -8,7 +8,7 @@ import ScalateKeys._
 object MoonrakerAnalyticsBuild extends Build {
   val Organization = "com.moonrakerAnalytics"
   val Name = "Moonraker Analytics"
-  val Version = "0.1.0"
+  val Version = "0.0.5"
   val ScalaVersion = "2.10.2"
   val ScalatraVersion = "2.2.2"
 
@@ -22,6 +22,7 @@ object MoonrakerAnalyticsBuild extends Build {
       scalaVersion := ScalaVersion,
       resolvers += Classpaths.typesafeReleases,
       libraryDependencies ++= Seq(
+        "org.eclipse.jgit" % "org.eclipse.jgit.http.server" % "3.0.0.201306101825-r",
         "org.scalatra" %% "scalatra-json" % "2.2.2",
         "org.json4s" %% "json4s-jackson" % "3.2.6",
         "org.scalatra" %% "scalatra" % ScalatraVersion,
