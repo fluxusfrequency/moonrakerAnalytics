@@ -26,6 +26,7 @@ class MyMoonrakerAnalyticsServlet extends MoonrakerAnalyticsStack {
     val responseStatus = response.status
 
     Ok(s"$responseBody")
+    Ok(s"$responseBody")
   }
 
   notFound {
