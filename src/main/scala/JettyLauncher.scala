@@ -11,7 +11,7 @@ object JettyLauncher {
     context setContextPath "/"
     context.setResourceBase("src/main/webapp")
     context.addServlet(classOf[com.moonrakerAnalytics.app.MyMoonrakerAnalyticsServlet], "/*")
-    context.addServlet(classOf[DefaultServlet], "/")
+    // context.addServlet(classOf[DefaultServlet], "/")
 
     server.setHandler(context)
 

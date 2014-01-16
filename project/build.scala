@@ -4,8 +4,6 @@ import org.scalatra.sbt._
 import org.scalatra.sbt.PluginKeys._
 import com.mojolly.scalate.ScalatePlugin._
 import ScalateKeys._
-import com.typesafe.sbteclipse.plugin.EclipsePlugin.EclipseKeys
-
 
 object MoonrakerAnalyticsBuild extends Build {
   val Organization = "com.moonrakerAnalytics"
@@ -17,7 +15,7 @@ object MoonrakerAnalyticsBuild extends Build {
   lazy val project = Project (
     "moonraker-analytics",
     file("."),
-    settings = Defaults.defaultSettings ++ ScalatraPlugin.scalatraWithJRebel ++ scalateSettings ++ Seq(
+    settings = seq(com.typesafe.sbt.SbtStartScript.startScriptForClassesSettings: _*) ++ Defaults.defaultSettings ++ ScalatraPlugin.scalatraWithJRebel ++ scalateSettings ++ Seq(
       organization := Organization,
       name := Name,
       version := Version,
@@ -35,9 +33,6 @@ object MoonrakerAnalyticsBuild extends Build {
         "org.eclipse.jetty" % "jetty-webapp" % "8.1.8.v20121106" % "compile;container",
         "org.eclipse.jetty.orbit" % "javax.servlet" % "3.0.0.v201112011016" % "compile;container;provided;test" artifacts (Artifact("javax.servlet", "jar", "jar"))
       ),
-      EclipseKeys.withSource := true,
-      javacOptions in compile ++= Seq("-target", "6", "-source", "6"),
-      packageOptions += Package.MainClass("JettyLauncher"),
       scalateTemplateConfig in Compile <<= (sourceDirectory in Compile){ base =>
         Seq(
           TemplateConfig(
