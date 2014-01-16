@@ -1,1 +1,28 @@
 <h2>Viewing Url for Source</h2>
+
+<div class = "span3">
+  <ul class="nav nav-list">
+    <li class="nav-header"><%# source.identifier %></li>
+    <li><a href="/sources/<%# source.identifier %>">Home</a></li>
+    <li><a href="/sources/<%# source.identifier %>/events">Events</a></li>
+    <li><a href="/sources/<%# source.identifier %>/campaigns">Campaigns</a></li>
+  </ul>
+</div>
+
+<div class = "span8">
+  <h3>URL: <%# path %></h3>
+  <pre>Longest response time to shortest response time</pre>
+  <table class="table">
+  <thead>
+    <tr>
+      <th width="50%">responded in</th>
+    </tr>
+    <%# response_times.each do |time| %>
+      <%# if time %>
+        <tr>
+          <td><%# time %> ms</td>
+        </tr>
+      <%# end %>
+    <%# end %>
+  </table>
+</div>

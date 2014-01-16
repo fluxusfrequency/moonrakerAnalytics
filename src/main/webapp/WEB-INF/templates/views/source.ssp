@@ -1,1 +1,91 @@
 <h2>Viewing Source</h2>
+
+<div class = "span3">
+  <ul class="nav nav-list">
+    <li class="nav-header"><%# source.identifier %></li>
+    <li class="active"><a href="/sources/<%# source.identifier %>">Home</a></li>
+    <li><a href="/sources/<%# source.identifier %>/events">Events</a></li>
+    <li><a href="/sources/<%# source.identifier %>/campaigns">Campaigns</a></li>
+  </ul>
+  <br>
+  <br>
+  <br>
+</div>
+
+<div class = "span8">
+  <h3>Home</h3>
+  <pre>Most requested URLS to least requested URLS (url)</pre>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th width="50%">url</th>
+        <th>count</th>
+      </tr>
+    <%# urls.each do |key, value| %>
+      <tr>
+        <td><a href="/sources/<%# source.identifier %>/urls<%# key %>"><%# key %></a></td>
+        <td><%# value %></td>
+      </tr>
+    <%# end %>
+  </table>
+<br>
+  <pre>Web browser breakdown across all requests (userAgent)</pre>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th width="50%">browser</th>
+        <th>count</th>
+      </tr>
+    <%# browsers.each do |key, value| %>
+      <tr>
+        <td><%# key %></td>
+        <td><%# value %></td>
+      </tr>
+    <%# end %>
+  </table>
+<br>
+  <pre>OS breakdown across all requests (userAgent)</pre>
+  <table class="table">
+    <thead>
+      <tr>
+        <th width="50%">OS</th>
+        <th>count</th>
+      </tr>
+    <%# oss.each do |key, value| %>
+      <tr>
+        <td><%# key %></td>
+        <td><%# value %></td>
+      </tr>
+    <%# end %>
+  </table>
+<br>
+  <pre>Screen Resolution across all requests (width x height)</pre>
+  <table class="table">
+    <thead>
+      <tr>
+        <th width="50%">resolution</th>
+        <th>count</th>
+      </tr>
+    <%# resolutions.each do |key, value| %>
+      <tr>
+        <td><%# key %></td>
+        <td><%# value %></td>
+      </tr>
+    <%# end %>
+  </table>
+<br>
+  <pre>Longest, average response time per URL to shortest, average response time per URL</pre>
+  <table class="table">
+    <thead>
+      <tr>
+        <th width="50%">url</th>
+        <th>avg response time</th>
+      </tr>
+    <%# avg_response_time_per_urls.each do |key, value| %>
+      <tr>
+        <td><a href="/sources/<%# source.identifier %>/urls<%# key %>"><%# key %></a></td>
+        <td><%# value.round(1) %> ms</td>
+      </tr>
+    <%# end %>
+  </table>
+</div>
