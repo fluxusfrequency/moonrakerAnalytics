@@ -1,5 +1,4 @@
 <%@ val body: String %>
-<%@ var baseUrl: String = "/assets/" %>
 <!doctype html>
 <html class="full" lang="en">
 <html>
@@ -10,10 +9,10 @@
     <meta name="author" content="">
 
     <!-- Bootstrap core CSS -->
-    <link href="${baseUrl}css/bootstrap.css" rel="stylesheet">
+    <link href="css/bootstrap.css" rel="stylesheet">
 
     <!-- Custom CSS for the 'Full' Template -->
-    <link href="${baseUrl}css/the-big-picture.css" rel="stylesheet">
+    <link href="css/the-big-picture.css" rel="stylesheet">
     <title>Moonraker Analytics</title>
   </head>
   <body>
@@ -62,7 +61,7 @@
 
 
     <!-- JavaScript -->
-    <script src="${baseUrl}js/jquery-1.10.2.js"></script>
-    <script src="${baseUrl}js/bootstrap.js"></script>
+    <script src="js/jquery-1.10.2.js"></script>
+    <script src="js/bootstrap.js"></script>
   </body>
 </html>
