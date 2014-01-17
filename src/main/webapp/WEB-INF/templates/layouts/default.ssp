@@ -1,4 +1,5 @@
 <%@ val body: String %>
+<%@ val rootUrl: String = uri("/") %>
 <!doctype html>
 <html class="full" lang="en">
 <html>
@@ -9,10 +10,10 @@
     <meta name="author" content="">
 
     <!-- Bootstrap core CSS -->
-    <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="${rootUrl}css/bootstrap.css" rel="stylesheet">
 
     <!-- Custom CSS for the 'Full' Template -->
-    <link href="css/the-big-picture.css" rel="stylesheet">
+    <link href="${rootUrl}css/the-big-picture.css" rel="stylesheet">
     <title>Moonraker Analytics</title>
   </head>
   <body>
@@ -58,7 +59,7 @@
 
 
     <!-- JavaScript -->
-    <script src="js/jquery-1.10.2.js"></script>
-    <script src="js/bootstrap.js"></script>
+    <script src="${rootUrl}js/jquery-1.10.2.js"></script>
+    <script src="${rootUrl}js/bootstrap.js"></script>
   </body>
 </html>
