@@ -1,5 +1,7 @@
 # Moonraker Analytics #
 
+This is an analytics engine experiment built in Scalatra. It mimics Google Analytics, with limited functionality. It's based on the Jumpstart Lab tutorial for [Traffic Spy](http://tutorials.jumpstartlab.com/projects/traffic_spy.html)
+
 ## Build & Run ##
 
 ```sh
